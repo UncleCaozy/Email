@@ -20,9 +20,9 @@ class EmailSend extends Command {
      */
     protected $description = '多进程执行批量发送邮件';
 
-    const EMAIL_TPL      = 'major_roll_pt_669';               //本次批量发送邮件的模版
-    const EMAIL_TPL_NAME = 'Major锦鲤ROLL房邮件群发';              //本次批量发送邮件的需求名
-    const DING_AT_USER   = ['18268062307','15014506409'];                //本次批量邮件需求负责人
+    const EMAIL_TPL      = 'pt_1224';               //本次批量发送邮件的模版
+    const EMAIL_TPL_NAME = 'CSGO十周年邮件';              //本次批量发送邮件的需求名
+    const DING_AT_USER   = ['18268062307'];                //本次批量邮件需求负责人
 
     /**
      * Create a new command instance.
@@ -40,7 +40,7 @@ class EmailSend extends Command {
             $emailUser = $redis->rPop(EmailUserInit::EMAIL_USER_LIST_REDIS_KEY);
             if ($emailUser) {
                 $emailUser = json_decode($emailUser, true);
-                $email     = $emailUser['email'];
+                $email     = trim($emailUser['email']);
                 $vars      = new \stdClass(); //必须为对象，否则发送邮件接口会报错：net.sf.json.JSONArray cannot be cast to net.sf.json.JSONObject
                 try {
                     $lock_key = 'user_email_' . $email;
@@ -60,7 +60,7 @@ class EmailSend extends Command {
                 } catch (\Throwable $e) {
                     echo $email . "---------------" . $e->getMessage() . "\n";
                 }
-                if (intval($emailUser['id']) === 917000){
+                if (intval($emailUser['id']) === 19469){
                     $this->sendDingTalk();
                 }
             } else {
