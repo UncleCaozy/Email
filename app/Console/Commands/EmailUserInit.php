@@ -34,7 +34,7 @@ class EmailUserInit extends Command {
 
     public function handle() {
         $redis = app('redis.connection');
-        UserEmailTemp::query()->where('is_send', 0)->where('id','>',30000)
+        UserEmailTemp::query()->where('is_send', 0)
             ->chunk(10000, function ($users) use ($redis) {
                 foreach ($users as $user) {
                     $res = $redis->lpush(self::EMAIL_USER_LIST_REDIS_KEY, json_encode($user->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
