@@ -60,7 +60,7 @@ class EmailSend extends Command {
                 } catch (\Throwable $e) {
                     echo $email . "---------------" . $e->getMessage() . "\n";
                 }
-                if (intval($emailUser['id']) === 19469){
+                if (intval($emailUser['id']) === 994030){
                     $this->sendDingTalk();
                 }
             } else {
