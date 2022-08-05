@@ -15,7 +15,6 @@ class EmailUserInit extends Command {
      */
     protected $signature = 'emailUserInit';
 
-
     /**
      * The console command description.
      *
